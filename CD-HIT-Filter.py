@@ -55,8 +55,8 @@ def clstr_filt(cluster_dic):
 	clusters, filtered_dic = list(cluster_dic), {}
 
 	# parse through the keys and check the cluster size,
-	# if the size is < minimum size, delete the entry from
-	# the cluster_dic
+	# if the size is > minimum size, add the cluster to the
+	# filtered dic
 	for cluster in clusters:
 		if len(cluster_dic[cluster]) > args.minimum:
 			for sequence in cluster_dic[cluster]:
@@ -85,7 +85,7 @@ def parse_fasta(filtered_dic):
 	seq_file.close()
 
 	# open the filter_output file
-	filter_file = open('%s_min_%i.fasta' % (os.path.splitext(args.fasta)[0], args.minimum), 'w')
+	filter_file = open('{0}_min_{1}.fasta'.format(os.path.splitext(args.fasta)[0], args.minimum), 'w')
 
 	# loop through the sequence list
 	while len(seq_list) > 0:
@@ -97,7 +97,7 @@ def parse_fasta(filtered_dic):
 		if seq[0][1:] in filtered_dic:
 			
 			# if present, write the header / sequence to the filter_file
-			filter_file.write('%s\n%s\n' % (filtered_dic[seq[0][1:]], '\n'.join([seq[1][i:i+60] for i in range(0, len(seq[1]), 60)])))
+			filter_file.write('{0}\n{1}\n'.format(filtered_dic[seq[0][1:]], '\n'.join([seq[1][i:i+60] for i in range(0, len(seq[1]), 60)])))
 
 	# close the filtered results file
 	filter_file.close()
