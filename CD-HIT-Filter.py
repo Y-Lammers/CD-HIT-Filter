@@ -37,7 +37,7 @@ def read_clstr():
 	# parse through the cluster file and store the cluster name + sequences in the dictionary
 	cluster_groups = (x[1] for x in itertools.groupby(cluster_file, key=lambda line: line[0] == '>'))
 	for cluster in cluster_groups:
-		name = cluster.next().strip()
+		name = cluster.next().strip().replace(' ','_')
 		seqs = [seq.split('>')[1].split('...')[0] for seq in cluster_groups.next()]
 		cluster_dic[name] = seqs
 
