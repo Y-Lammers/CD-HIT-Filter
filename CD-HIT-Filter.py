@@ -58,7 +58,7 @@ def clstr_filt(cluster_dic):
 	# if the size is > minimum size, add the cluster to the
 	# filtered dic
 	for cluster in clusters:
-		if len(cluster_dic[cluster]) > args.minimum:
+		if len(cluster_dic[cluster]) >= args.minimum:
 			for sequence in cluster_dic[cluster]:
 				filtered_dic[sequence] = cluster
 
